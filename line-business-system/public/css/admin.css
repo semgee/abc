@@ -1,0 +1,269 @@
+/* ============================
+   LINE 商業系統 - 管理後台樣式
+   ============================ */
+:root {
+    --primary: #FF6B35;
+    --primary-dark: #E55A24;
+    --secondary: #4CAF50;
+    --sidebar-bg: #1a1f36;
+    --sidebar-text: #a0aec0;
+    --sidebar-active: #FF6B35;
+    --card-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    --border: #e2e8f0;
+    --text: #2d3748;
+    --text-light: #718096;
+    --bg: #f7f8fc;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, 'Noto Sans TC', sans-serif; background: var(--bg); color: var(--text); }
+
+/* ── 登入頁 ── */
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #FF6B35 0%, #F7455B 100%);
+}
+.login-card {
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    width: 380px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+.login-logo { text-align: center; margin-bottom: 32px; }
+.login-logo .logo-icon { font-size: 48px; }
+.login-logo h1 { font-size: 24px; font-weight: 700; color: var(--text); margin-top: 8px; }
+.login-logo p { color: var(--text-light); font-size: 14px; }
+
+/* ── 後台佈局 ── */
+.admin-layout { display: flex; min-height: 100vh; }
+.sidebar {
+    width: 240px;
+    background: var(--sidebar-bg);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+}
+.sidebar-logo {
+    padding: 24px 20px;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.sidebar-nav { flex: 1; padding: 16px 0; }
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+}
+.nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
+.nav-item.active { background: rgba(255,107,53,0.15); color: var(--sidebar-active); border-left-color: var(--sidebar-active); }
+.nav-item i { width: 20px; }
+.sidebar-footer { padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+.btn-logout {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--sidebar-text);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+.btn-logout:hover { background: rgba(255,255,255,0.1); color: white; }
+
+.main-content { margin-left: 240px; flex: 1; }
+.page-header {
+    background: white;
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.page-header h2 { font-size: 20px; font-weight: 600; }
+.admin-badge {
+    background: var(--primary);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+#page-content { padding: 24px 28px; }
+
+/* ── 通用元件 ── */
+.hidden { display: none !important; }
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+.card-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.card-body { padding: 20px; }
+
+/* 統計卡片 */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--card-shadow);
+    border-left: 4px solid var(--primary);
+}
+.stat-card.green { border-left-color: #4CAF50; }
+.stat-card.blue { border-left-color: #2196F3; }
+.stat-card.purple { border-left-color: #9C27B0; }
+.stat-card.orange { border-left-color: #FF9800; }
+.stat-label { font-size: 13px; color: var(--text-light); margin-bottom: 8px; }
+.stat-value { font-size: 28px; font-weight: 700; color: var(--text); }
+.stat-sub { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+
+/* 表格 */
+.table-container { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th { background: #f8fafc; padding: 12px 16px; text-align: left; font-size: 13px; color: var(--text-light); font-weight: 600; border-bottom: 1px solid var(--border); }
+td { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 14px; vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #fafafa; }
+
+/* 按鈕 */
+.btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: var(--primary-dark); }
+.btn-secondary { background: #e2e8f0; color: var(--text); }
+.btn-secondary:hover { background: #cbd5e0; }
+.btn-success { background: #4CAF50; color: white; }
+.btn-danger { background: #f56565; color: white; }
+.btn-sm { padding: 5px 10px; font-size: 12px; }
+.btn-block { width: 100%; justify-content: center; }
+
+/* 表單 */
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; color: var(--text); }
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text);
+    transition: border-color 0.2s;
+}
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* 搜尋列 */
+.search-bar { display: flex; gap: 12px; margin-bottom: 16px; }
+.search-bar input { flex: 1; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; }
+.search-bar select { padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; }
+
+/* 分頁 */
+.pagination { display: flex; gap: 8px; justify-content: center; margin-top: 20px; }
+.page-btn {
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+.page-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+/* 狀態標籤 */
+.badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+.badge-pending { background: #FFF3E0; color: #FF9800; }
+.badge-confirmed { background: #E3F2FD; color: #2196F3; }
+.badge-shipping { background: #E0F7FA; color: #00BCD4; }
+.badge-delivered { background: #E8F5E9; color: #4CAF50; }
+.badge-cancelled { background: #FFEBEE; color: #f44336; }
+.badge-general { background: #E8F5E9; color: #4CAF50; }
+.badge-silver { background: #F5F5F5; color: #9E9E9E; }
+.badge-gold { background: #FFF8E1; color: #FFC107; }
+.badge-platinum { background: #F3E5F5; color: #9C27B0; }
+
+/* 會員頭像 */
+.member-avatar { display: flex; align-items: center; gap: 10px; }
+.avatar-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
+
+/* 錯誤訊息 */
+.error-msg { color: #f56565; font-size: 14px; margin-top: 8px; text-align: center; }
+
+/* 儀表板網格 */
+.dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+
+/* 模態框 */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+.modal {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+.modal-header { display: flex; justify-content: space-between; margin-bottom: 20px; }
+.modal-title { font-size: 18px; font-weight: 600; }
+.modal-close { background: none; border: none; font-size: 20px; cursor: pointer; color: var(--text-light); }
+
+@media (max-width: 768px) {
+    .sidebar { width: 60px; }
+    .sidebar-logo span:last-child, .nav-item span, .btn-logout span { display: none; }
+    .main-content { margin-left: 60px; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .dashboard-grid { grid-template-columns: 1fr; }
+}

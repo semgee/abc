@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LINE 商業系統 - 管理後台</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- 登入頁 -->
+    <div id="login-page" class="login-page">
+        <div class="login-card">
+            <div class="login-logo">
+                <span class="logo-icon">🛍️</span>
+                <h1>LINE 商業系統</h1>
+                <p>管理後台</p>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label>帳號</label>
+                    <input type="text" id="username" placeholder="請輸入管理員帳號" required>
+                </div>
+                <div class="form-group">
+                    <label>密碼</label>
+                    <input type="password" id="password" placeholder="請輸入密碼" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">登入</button>
+                <p id="login-error" class="error-msg hidden"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- 主後台 -->
+    <div id="admin-page" class="admin-layout hidden">
+        <!-- 側邊欄 -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <span>🛍️</span>
+                <span>LINE商店</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" data-page="dashboard" class="nav-item active">
+                    <i class="fas fa-chart-line"></i> 儀表板
+                </a>
+                <a href="#" data-page="members" class="nav-item">
+                    <i class="fas fa-users"></i> 會員管理
+                </a>
+                <a href="#" data-page="products" class="nav-item">
+                    <i class="fas fa-box"></i> 商品管理
+                </a>
+                <a href="#" data-page="orders" class="nav-item">
+                    <i class="fas fa-shopping-cart"></i> 訂單管理
+                </a>
+                <a href="#" data-page="settings" class="nav-item">
+                    <i class="fas fa-cog"></i> 系統設定
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button onclick="logout()" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> 登出
+                </button>
+            </div>
+        </aside>
+
+        <!-- 主內容區 -->
+        <main class="main-content">
+            <!-- 頁頭 -->
+            <header class="page-header">
+                <h2 id="page-title">儀表板</h2>
+                <span id="admin-name" class="admin-badge"></span>
+            </header>
+
+            <!-- 頁面內容 -->
+            <div id="page-content"></div>
+        </main>
+    </div>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>
