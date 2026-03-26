@@ -41,6 +41,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const adminRouter = require('./routes/admin');
 app.use('/api/admin', adminRouter);
 
+// 進銷存管理 API
+const inventoryRouter = require('./routes/inventory');
+app.use('/api/inventory', inventoryRouter);
+
+// 財務管理 API
+const financeRouter = require('./routes/finance');
+app.use('/api/finance', financeRouter);
+
+// 發票管理 API
+const invoiceRouter = require('./routes/invoice');
+app.use('/api/invoices', invoiceRouter);
+
+// BOM + 生產管理 API
+const bomRouter = require('./routes/bom');
+app.use('/api/bom', bomRouter);
+
 // 健康檢查
 app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
