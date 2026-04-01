@@ -84,5 +84,50 @@ for (const p of products) {
 }
 console.log('✅ 商品資料完成 (8筆)');
 
+// ── 供應商資料 ──────────────────────────────
+const insertSupplier = db.prepare(`
+    INSERT OR IGNORE INTO suppliers (id, code, name, contact_person, phone, email, address, tax_id, payment_terms)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+`);
+
+insertSupplier.run(1, 'SUP-001', '大和食品有限公司', '王經理', '02-2345-6789', 'wang@dahe.com', '台北市中正區忠孝東路100號', '12345678', 30);
+insertSupplier.run(2, 'SUP-002', '美麗化工股份有限公司', '李副理', '02-8765-4321', 'lee@beauty.com', '新北市板橋區文化路50號', '87654321', 45);
+insertSupplier.run(3, 'SUP-003', '全球包材行', '陳老闆', '03-1234-5678', 'chen@global.com', '桃園市中壢區中正路200號', '11223344', 15);
+
+console.log('✅ 供應商資料完成 (3筆)');
+
+// ── 原料商品 (BOM 用) ─────────────────────────
+const insertMaterial = db.prepare(`
+    INSERT OR IGNORE INTO products
+        (id, category_id, sku, name, description, price, stock, is_active, is_featured)
+    VALUES (?, ?, ?, ?, ?, ?, ?, 1, 0)
+`);
+
+// 為「超值組合 保養三件組 (id=7)」的原料
+insertMaterial.run(101, 9, 'MAT-001', '精華液原液 30ml', 'BOM 原料: 精華液', 200, 500);
+insertMaterial.run(102, 9, 'MAT-002', '面膜基布 5片裝', 'BOM 原料: 面膜', 80, 300);
+insertMaterial.run(103, 9, 'MAT-003', '乳液基底 50ml', 'BOM 原料: 乳液', 120, 400);
+insertMaterial.run(104, 4, 'MAT-004', '禮盒包裝組', 'BOM 原料: 包裝材料', 35, 200);
+
+console.log('✅ 原料商品資料完成 (4筆)');
+
+// ── BOM 資料 ────────────────────────────────
+const insertBOM = db.prepare(`
+    INSERT OR IGNORE INTO bom_headers (id, product_id, bom_code, version, description, yield_qty)
+    VALUES (?, ?, ?, ?, ?, ?)
+`);
+insertBOM.run(1, 7, 'BOM-001', '1.0', '超值組合 保養三件組 BOM', 1);
+
+const insertBOMItem = db.prepare(`
+    INSERT OR IGNORE INTO bom_items (bom_id, material_product_id, quantity, unit, waste_rate, note, sort_order)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+`);
+insertBOMItem.run(1, 101, 1, 'pcs', 0.02, '精華液 30ml', 0);
+insertBOMItem.run(1, 102, 1, 'pcs', 0.03, '美白面膜 5片', 1);
+insertBOMItem.run(1, 103, 1, 'pcs', 0.02, '保濕乳液 50ml', 2);
+insertBOMItem.run(1, 104, 1, 'pcs', 0.01, '禮盒包裝', 3);
+
+console.log('✅ BOM 資料完成 (1組, 4項原料)');
+
 db.close();
 console.log('🎉 範例資料填充完成！');
